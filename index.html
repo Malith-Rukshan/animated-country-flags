@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Country Flags</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- TGS Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/tgs-player.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #ff006e;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border: #e9ecef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Flags Grid */
+        .flags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flag-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flag-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px var(--shadow);
+        }
+        
+        .flag-preview-main {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .flag-preview-main img {
+            max-height: 100%;
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .flag-emoji {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .flag-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .flag-code {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px var(--shadow);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            padding: 0;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Flag Preview Section */
+        .flag-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .format-switch {
+            display: flex;
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            padding: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .format-btn {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .format-btn.active {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .preview-box {
+            width: 200px;
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+
+        /* Code Snippets Section */
+        .code-snippets {
+            margin-top: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .code-block {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.2rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border);
+            margin-bottom: 0.75rem;
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Format Info Section */
+        .format-info {
+            margin-top: 2.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .format-info h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .format-info p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .format-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .format-info strong {
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212529;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .github-link {
+            color: #4cc9f0;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .github-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .flags-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+
+            .modal-header {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .preview-box {
+                width: 150px;
+                height: 120px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-secondary);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .no-results {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Animated Country Flags</h1>
+            <p>High-quality animated flags in TGS and WebP formats</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Box -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="Search for countries...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <!-- Format Selector -->
+        <div class="format-selector" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+            <div class="format-switch">
+                <button class="format-btn" id="grid-format-tgs" data-format="tgs">TGS</button>
+                <button class="format-btn active" id="grid-format-webp" data-format="webp">WebP</button>
+            </div>
+        </div>
+
+        <!-- Flags Grid -->
+        <div id="flags-container" class="flags-grid">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading flags...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Flag Details Modal -->
+    <div id="flag-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Flag Details</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Flag Preview -->
+                <div class="flag-preview">
+                    <div class="format-switch">
+                        <button class="format-btn active" data-format="tgs">TGS</button>
+                        <button class="format-btn" data-format="webp">WebP</button>
+                    </div>
+                    <div class="preview-box" id="preview-container"></div>
+                </div>
+
+                <!-- Code Snippets -->
+                <div class="code-snippets">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="html">HTML</button>
+                        <button class="tab-btn" data-tab="markdown">Markdown</button>
+                        <button class="tab-btn" data-tab="cdn">CDN Link</button>
+                    </div>
+
+                    <div class="tab-content active" data-tab="html">
+                        <pre class="code-block" id="html-code"></pre>
+                        <button class="copy-btn" data-code="html">Copy HTML</button>
+                    </div>
+
+                    <div class="tab-content" data-tab="markdown">
+                        <pre class="code-block" id="markdown-code"></pre>
+                        <button class="copy-btn" data-code="markdown">Copy Markdown</button>
+                    </div>
+
+                    <div class="tab-content" data-tab="cdn">
+                        <pre class="code-block" id="cdn-code"></pre>
+                        <button class="copy-btn" data-code="cdn">Copy CDN Link</button>
+                    </div>
+                </div>
+
+                <!-- Format Information -->
+                <div class="format-info">
+                    <h3>About TGS and WebP Formats</h3>
+                    <p><strong>TGS (Telegram Sticker):</strong> A compressed format for animations based on Lottie JSON, optimized for small file sizes. Perfect for lightweight applications and supported by the LottieFiles TGS player.</p>
+                    <p><strong>WebP:</strong> A modern image format developed by Google that supports animation with smaller file sizes compared to GIFs. It offers better compression and quality for animated content on the web.</p>
+                    <p>Both formats in this library are animated, but they serve different use cases. TGS is ideal for applications that support Lottie animations, while WebP works everywhere without additional libraries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Created with ❤️ | <a href="https://github.com/yourusername/animated-country-flags" class="github-link" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Global Variables
+        let flagsData = [];
+        let currentFlag = null;
+        let currentFormat = 'tgs'; // Default format for modal view
+        let gridFormat = 'webp';   // Default format for grid view - WebP is more efficient
+        const baseUrl = 'https://Malith-Rukshan.github.io/animated-country-flags';
+        
+        // DOM Elements
+        const flagsContainer = document.getElementById('flags-container');
+        const searchInput = document.getElementById('search-input');
+        const modal = document.getElementById('flag-modal');
+        const modalClose = document.getElementById('modal-close');
+        const previewContainer = document.getElementById('preview-container');
+        const modalTitle = document.getElementById('modal-title');
+        const htmlCode = document.getElementById('html-code');
+        const markdownCode = document.getElementById('markdown-code');
+        const cdnCode = document.getElementById('cdn-code');
+        const formatButtons = document.querySelectorAll('.format-btn');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const gridFormatTgs = document.getElementById('grid-format-tgs');
+        const gridFormatWebp = document.getElementById('grid-format-webp');
+        
+        // Fetch Flags Data
+        async function fetchFlagsData() {
+            try {
+                const response = await fetch('flags.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load flags data');
+                }
+                flagsData = await response.json();
+                displayFlags(flagsData);
+            } catch (error) {
+                console.error('Error loading flags data:', error);
+                flagsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load flags. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Display Flags
+        function displayFlags(flags) {
+            if (flags.length === 0) {
+                flagsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No flags found matching your search.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            flagsContainer.innerHTML = '';
+            flags.forEach(flag => {
+                const flagCard = document.createElement('div');
+                flagCard.className = 'flag-card';
+                
+                // Create preview container
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'flag-preview-main';
+                
+                // Add appropriate preview based on current format
+                if (gridFormat === 'tgs') {
+                    const tgsPlayer = document.createElement('tgs-player');
+                    tgsPlayer.setAttribute('src', `./tgs/${flag.code}.tgs`);
+                    tgsPlayer.setAttribute('autoplay', 'true');
+                    tgsPlayer.setAttribute('loop', 'true');
+                    tgsPlayer.setAttribute('style', 'width: 100px; height: 100px;');
+                    previewDiv.appendChild(tgsPlayer);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = `./webp/${flag.code}.webp`;
+                    img.alt = `${flag.name} Flag`;
+                    previewDiv.appendChild(img);
+                }
+                
+                flagCard.appendChild(previewDiv);
+                
+                // Add flag details
+                const detailsDiv = document.createElement('div');
+                detailsDiv.innerHTML = `
+                    <span class="flag-emoji">${flag.emoji}</span>
+                    <div class="flag-name">${flag.name}</div>
+                    <div class="flag-code">${flag.code}</div>
+                `;
+                flagCard.appendChild(detailsDiv);
+                
+                flagCard.addEventListener('click', () => openFlagDetails(flag));
+                flagsContainer.appendChild(flagCard);
+            });
+        }
+        
+        // Search Functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                displayFlags(flagsData);
+                return;
+            }
+            
+            const filteredFlags = flagsData.filter(flag => 
+                flag.name.toLowerCase().includes(searchTerm) || 
+                flag.code.toLowerCase().includes(searchTerm)
+            );
+            
+            displayFlags(filteredFlags);
+        });
+        
+        // Flag Details Modal
+        function openFlagDetails(flag) {
+            currentFlag = flag;
+            modalTitle.textContent = `${flag.name} (${flag.code})`;
+            updateFlagPreview();
+            updateCodeSnippets();
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close Modal
+        modalClose.addEventListener('click', closeModal);
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        // Format Switcher
+        formatButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                formatButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentFormat = button.getAttribute('data-format');
+                updateFlagPreview();
+                updateCodeSnippets();
+            });
+        });
+        
+        // Update Flag Preview
+        function updateFlagPreview() {
+            previewContainer.innerHTML = '';
+            
+            if (currentFormat === 'tgs') {
+                const tgsPlayer = document.createElement('tgs-player');
+                tgsPlayer.setAttribute('src', `./tgs/${currentFlag.code}.tgs`);
+                tgsPlayer.setAttribute('autoplay', 'true');
+                tgsPlayer.setAttribute('loop', 'true');
+                tgsPlayer.setAttribute('style', 'width: 150px; height: 150px;');
+                previewContainer.appendChild(tgsPlayer);
+            } else {
+                const img = document.createElement('img');
+                img.src = `./webp/${currentFlag.code}.webp`;
+                img.alt = `${currentFlag.name} Flag`;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '100%';
+                previewContainer.appendChild(img);
+            }
+        }
+        
+        // Update Code Snippets
+        function updateCodeSnippets() {
+            // HTML Code
+            htmlCode.textContent = currentFormat === 'tgs' 
+                ? `<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/tgs-player.js"><\/script>
+<tgs-player src="${baseUrl}/tgs/${currentFlag.code}.tgs" autoplay loop style="width: 150px; height: 150px;"></tgs-player>`
+                : `<img src="${baseUrl}/webp/${currentFlag.code}.webp" alt="${currentFlag.name} Flag" style="width: 150px;">`;
+            
+            // Markdown Code
+            markdownCode.textContent = `![${currentFlag.name} Flag](${baseUrl}/${currentFormat}/${currentFlag.code}.${currentFormat})`;
+            
+            // CDN Link
+            cdnCode.textContent = `${baseUrl}/${currentFormat}/${currentFlag.code}.${currentFormat}`;
+        }
+        
+        // Tab Switcher
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.getAttribute('data-tab');
+                
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    if (content.getAttribute('data-tab') === tab) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Copy Functionality
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.getAttribute('data-code');
+                let text = '';
+                
+                if (type === 'html') {
+                    text = htmlCode.textContent;
+                } else if (type === 'markdown') {
+                    text = markdownCode.textContent;
+                } else if (type === 'cdn') {
+                    text = cdnCode.textContent;
+                }
+                
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        alert('Failed to copy to clipboard');
+                    });
+            });
+        });
+        
+        // Grid Format Toggle
+        gridFormatTgs.addEventListener('click', () => {
+            gridFormatTgs.classList.add('active');
+            gridFormatWebp.classList.remove('active');
+            gridFormat = 'tgs';
+            displayFlags(
+                searchInput.value.toLowerCase().trim() === '' ? 
+                flagsData : 
+                flagsData.filter(flag => 
+                    flag.name.toLowerCase().includes(searchInput.value.toLowerCase().trim()) || 
+                    flag.code.toLowerCase().includes(searchInput.value.toLowerCase().trim())
+                )
+            );
+        });
+        
+        gridFormatWebp.addEventListener('click', () => {
+            gridFormatWebp.classList.add('active');
+            gridFormatTgs.classList.remove('active');
+            gridFormat = 'webp';
+            displayFlags(
+                searchInput.value.toLowerCase().trim() === '' ? 
+                flagsData : 
+                flagsData.filter(flag => 
+                    flag.name.toLowerCase().includes(searchInput.value.toLowerCase().trim()) || 
+                    flag.code.toLowerCase().includes(searchInput.value.toLowerCase().trim())
+                )
+            );
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchFlagsData();
+        });
+    </script>
+</body>
+</html>
