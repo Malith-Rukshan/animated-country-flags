@@ -1,0 +1,52 @@
+# Robots.txt for Animated Country Flags
+# https://malith-rukshan.github.io/animated-country-flags/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://malith-rukshan.github.io/animated-country-flags/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /tgs/
+Allow: /webp/
+Allow: /flags.json
+
+User-agent: Bingbot
+Allow: /
+Allow: /tgs/
+Allow: /webp/
+Allow: /flags.json
+
+User-agent: Slurp
+Allow: /
+Allow: /tgs/
+Allow: /webp/
+Allow: /flags.json
+
+User-agent: DuckDuckBot
+Allow: /
+Allow: /tgs/
+Allow: /webp/
+Allow: /flags.json
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Telegrambot
+Allow: /
