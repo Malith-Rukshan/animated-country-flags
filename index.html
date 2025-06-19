@@ -634,6 +634,7 @@
                 }
                 flagsData = await response.json();
                 displayFlags(flagsData);
+                return flagsData;
             } catch (error) {
                 console.error('Error loading flags data:', error);
                 flagsContainer.innerHTML = `
@@ -642,6 +643,7 @@
                         <p>Failed to load flags. Please try again later.</p>
                     </div>
                 `;
+                throw error;
             }
         }
         
@@ -701,6 +703,9 @@
         // Search Functionality
         searchInput.addEventListener('input', () => {
             const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            // Update URL with search parameter
+            updateUrlWithSearch(searchTerm);
             
             if (searchTerm === '') {
                 displayFlags(flagsData);
@@ -862,9 +867,40 @@
             );
         });
 
+        // URL Search Parameter Handler
+        function handleUrlSearch() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('search');
+            
+            if (searchTerm) {
+                searchInput.value = searchTerm;
+                // Trigger search after flags are loaded
+                setTimeout(() => {
+                    const filteredFlags = flagsData.filter(flag => 
+                        flag.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                        flag.code.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    displayFlags(filteredFlags);
+                }, 100);
+            }
+        }
+
+        // Update URL when search input changes
+        function updateUrlWithSearch(searchTerm) {
+            const url = new URL(window.location);
+            if (searchTerm && searchTerm.trim() !== '') {
+                url.searchParams.set('search', searchTerm.trim());
+            } else {
+                url.searchParams.delete('search');
+            }
+            window.history.replaceState({}, '', url);
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            fetchFlagsData();
+            fetchFlagsData().then(() => {
+                handleUrlSearch();
+            });
         });
     </script>
 </body>
