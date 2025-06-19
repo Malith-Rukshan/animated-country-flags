@@ -8,7 +8,7 @@
 
 [![TGS Format](https://img.shields.io/badge/TGS-Telegram_Stickers-0088CC?logo=telegram&style=flat)](https://core.telegram.org/animated_stickers)
 [![WebP Format](https://img.shields.io/badge/WebP-Animated-4285F4?logo=google&style=flat)](https://developers.google.com/speed/webp)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?logo=github&style=flat)](https://malith-rukshan.github.io/animated-country-flags/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?logo=github&style=flat)](https://animated-country-flags.malith.dev/)
 
 </div>
 
@@ -31,12 +31,12 @@
 
 ## 🛠️ Usage
 
-Visit our [GitHub Pages site](https://malith-rukshan.github.io/animated-country-flags/) to browse all available flags, search for specific countries, and get integration code.
+Visit our [GitHub Pages site](https://animated-country-flags.malith.dev/) to browse all available flags, search for specific countries, and get integration code.
 
 ### WebP Format (Recommended for most websites)
 
 ```html
-<img src="https://malith-rukshan.github.io/animated-country-flags/webp/US.webp" 
+<img src="https://animated-country-flags.malith.dev/webp/US.webp" 
      alt="United States Flag" 
      style="width: 150px;">
 ```
@@ -45,7 +45,7 @@ Visit our [GitHub Pages site](https://malith-rukshan.github.io/animated-country-
 
 ```html
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/tgs-player.js"></script>
-<tgs-player src="https://malith-rukshan.github.io/animated-country-flags/tgs/US.tgs" 
+<tgs-player src="https://animated-country-flags.malith.dev/tgs/US.tgs" 
             autoplay loop 
             style="width: 150px; height: 150px;">
 </tgs-player>
@@ -54,7 +54,7 @@ Visit our [GitHub Pages site](https://malith-rukshan.github.io/animated-country-
 ### Markdown Integration
 
 ```markdown
-![United States Flag](https://malith-rukshan.github.io/animated-country-flags/webp/US.webp)
+![United States Flag](https://animated-country-flags.malith.dev/webp/US.webp)
 ```
 
 ## 📸 Examples
@@ -63,11 +63,11 @@ Here are some examples of the animated flags in action:
 
 | Flag | Country | TGS | WebP |
 |------|---------|-----|------|
-| 🇺🇸 | United States | [US.tgs](https://malith-rukshan.github.io/animated-country-flags/tgs/US.tgs) | [US.webp](https://malith-rukshan.github.io/animated-country-flags/webp/US.webp) |
-| 🇬🇧 | United Kingdom | [GB.tgs](https://malith-rukshan.github.io/animated-country-flags/tgs/GB.tgs) | [GB.webp](https://malith-rukshan.github.io/animated-country-flags/webp/GB.webp) |
-| 🇯🇵 | Japan | [JP.tgs](https://malith-rukshan.github.io/animated-country-flags/tgs/JP.tgs) | [JP.webp](https://malith-rukshan.github.io/animated-country-flags/webp/JP.webp) |
-| 🇱🇰 | Sri Lanka | [LK.tgs](https://malith-rukshan.github.io/animated-country-flags/tgs/LK.tgs) | [LK.webp](https://malith-rukshan.github.io/animated-country-flags/webp/LK.webp) |
-| 🇺🇳 | United Nations | [UN.tgs](https://malith-rukshan.github.io/animated-country-flags/tgs/UN.tgs) | [UN.webp](https://malith-rukshan.github.io/animated-country-flags/webp/UN.webp) |
+| 🇺🇸 | United States | [US.tgs](https://animated-country-flags.malith.dev/tgs/US.tgs) | [US.webp](https://animated-country-flags.malith.dev/webp/US.webp) |
+| 🇬🇧 | United Kingdom | [GB.tgs](https://animated-country-flags.malith.dev/tgs/GB.tgs) | [GB.webp](https://animated-country-flags.malith.dev/webp/GB.webp) |
+| 🇯🇵 | Japan | [JP.tgs](https://animated-country-flags.malith.dev/tgs/JP.tgs) | [JP.webp](https://animated-country-flags.malith.dev/webp/JP.webp) |
+| 🇱🇰 | Sri Lanka | [LK.tgs](https://animated-country-flags.malith.dev/tgs/LK.tgs) | [LK.webp](https://animated-country-flags.malith.dev/webp/LK.webp) |
+| 🇺🇳 | United Nations | [UN.tgs](https://animated-country-flags.malith.dev/tgs/UN.tgs) | [UN.webp](https://animated-country-flags.malith.dev/webp/UN.webp) |
 
 ## 🔍 Format Comparison
 
@@ -85,7 +85,7 @@ Here are some examples of the animated flags in action:
 
 ## 💻 GitHub Pages Interface
 
-We've created a user-friendly [GitHub Pages interface](https://malith-rukshan.github.io/animated-country-flags/) to help you:
+We've created a user-friendly [GitHub Pages interface](https://animated-country-flags.malith.dev/) to help you:
 
 - Browse all available flags
 - Search for specific countries
