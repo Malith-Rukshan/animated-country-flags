@@ -1,11 +1,11 @@
 # Robots.txt for Animated Country Flags
-# https://malith-rukshan.github.io/animated-country-flags/
+# https://animated-country-flags.malith.dev/
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://malith-rukshan.github.io/animated-country-flags/sitemap.xml
+Sitemap: https://animated-country-flags.malith.dev/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
