@@ -134,4 +134,4 @@ If you have any questions or suggestions, you can reach out to me:
 
 ---
 
-🧑‍💻 Built with 💖 by [Single Developers </>](https://SingleDevelopers.com)
+🧑‍💻 Built with ❤️ by [Malith Rukshan](https://malith.dev)
